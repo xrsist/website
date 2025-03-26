@@ -46,6 +46,31 @@ gsap.to("#main", {
     },
 });
 
+// Get the "ABOUT US" text element
+const aboutUsText = document.querySelector(".about-us-text");
+
+// Add event listener for mouse movement
+aboutUsText.addEventListener("mousemove", (e) => {
+    // Get the bounding box of the text element
+    const rect = aboutUsText.getBoundingClientRect();
+
+    // Calculate the cursor's position relative to the text element
+    const x = (e.clientX - rect.left) / rect.width; // Normalized X position (0 to 1)
+    const y = (e.clientY - rect.top) / rect.height; // Normalized Y position (0 to 1)
+
+    // Set the transform origin based on the cursor's position
+    aboutUsText.style.transformOrigin = `${x * 100}% ${y * 100}%`;
+});
+
+// Reset the transform origin when the mouse leaves the text
+aboutUsText.addEventListener("mouseleave", () => {
+    aboutUsText.style.transformOrigin = "center"; // Reset to default
+});
+
+document.getElementById("arrow").addEventListener("click", function() {
+    document.getElementById("page3").scrollIntoView({ behavior: "smooth" });
+});
+
 gsap.from("#about-us img,#about-us-in", {
     y: 90,
     opacity: 0,
@@ -101,8 +126,8 @@ gsap.from("#page4 h1", {
     scrollTrigger: {
         trigger: "#page4 h1",
         scroller: "body",
-        start: "top 75%",
-        end: "top 70%",
+        start: "top 25%",
+        end: "top 35%",
         scrub: 4,
     },
 });
